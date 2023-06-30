@@ -1,6 +1,16 @@
 from datetime import datetime
 import time
+import json
+
+false = False
+true = True
 tasks = []
+path_name = '/Users/mohamedbloul/Desktop/codzilla cours/Section 14/task_session.txt'
+with open(path_name) as vt:
+    view_taks_check = vt.readline()
+    if len(view_taks_check)>0:
+        tasks = eval(view_taks_check)
+
 print("-------Hello In Task Maneger Program-------")
 def intro_task_maneger():
     while True:
@@ -95,9 +105,28 @@ def view_taks():
     else:
         print("🟥.You don't have task for view, Please add task 📝 and try again!!!")
 
+
+def save_task():
+    with open(path_name, 'w') as st:
+        json.dump(tasks, st)
+
+
+
+
 # function for show messege if choice exit
 def show_result():
-    
+    while True:
+        message_save = input('Do you want to save this session [y/n] >  ')
+        if message_save.lower() == 'y':
+            save_task()
+            print('Session saved successfuly')
+            break
+        elif message_save.lower() == 'n':
+            print('This session is not saved!')
+            break
+        else:
+            continue
+
     if len(tasks) == 0:
         print("You are lazy today, you did not add any task, you a loser boy 👎👎👎👎")
         print("Thank 😠😠 for use programe (TASK MENEGER) have a nice day loser boy!!😡😡😡")
